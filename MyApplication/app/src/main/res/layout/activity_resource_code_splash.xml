@@ -11,7 +11,8 @@
             android:id="@+id/disk_lru_cache_demo"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="diskLruCache"
+            android:minWidth="100dp"
+            android:text="Cache"
             android:textAllCaps="false"/>
     </LinearLayout>
 
