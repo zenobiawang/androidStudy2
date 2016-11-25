@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.wanghui1.androidstudy.base.BaseActivity;
+import com.example.wanghui1.androidstudy.design.DesignSplashActivity;
 import com.example.wanghui1.androidstudy.resoucecode.ResourceCodeSplashActivity;
 
 /**
@@ -18,6 +19,8 @@ public class SplashActivity extends BaseActivity {
 
     private void initListener() {
         findViewById(R.id.btn_source_code).setOnClickListener(view -> startActivity(this, ResourceCodeSplashActivity.class));
+        findViewById(R.id.btn_design).setOnClickListener(view -> startActivity(this, DesignSplashActivity.class));
+
     }
 
     @Override

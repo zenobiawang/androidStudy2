@@ -11,6 +11,7 @@ import com.example.wanghui1.androidstudy.base.BaseActivity;
 
 public class DiskLruCacheDemoActivity extends BaseActivity {
     private String IMG_URL = "http://pic37.nipic.com/20140102/15590187_203601118161_2.jpg";
+
     @Override
     protected void init(Bundle savedInstanceState, View view) {
 
