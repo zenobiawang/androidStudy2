@@ -7,9 +7,10 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        auto:counterTextAppearance="@color/colorPrimaryDark"
-        auto:counterOverflowTextAppearance="@color/colorAccent"
-        auto:hintTextAppearance="@color/black_overlay">
+        android:textColorHint="@color/colorAccent"
+        auto:hintTextAppearance="@color/black_overlay"
+        auto:counterTextAppearance="@color/black_overlay"
+        auto:counterOverflowTextAppearance="@color/colorPrimary">
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
