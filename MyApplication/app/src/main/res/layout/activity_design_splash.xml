@@ -8,9 +8,16 @@
         android:orientation="vertical">
         <Button
             android:id="@+id/btn_text_input"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:minWidth="100dp"
             android:textAllCaps="false"
             android:text="TextInput"/>
+        <Button
+            android:id="@+id/btn_view_group_demo"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textAllCaps="false"
+            android:text="自定义ViewGroup"/>
     </LinearLayout>
 </ScrollView>

@@ -9,6 +9,7 @@ import com.example.wanghui1.androidstudy.resoucecode.ResourceCodeSplashActivity;
 
 /**
  * Created by wanghui on 2016/11/25.
+ * 自定义View
  */
 
 public class DesignSplashActivity extends BaseActivity {
@@ -19,6 +20,7 @@ public class DesignSplashActivity extends BaseActivity {
 
     private void initListener() {
         findViewById(R.id.btn_text_input).setOnClickListener(view -> startActivity(this, TextInputLayoutTestActivity.class));
+        findViewById(R.id.btn_view_group_demo).setOnClickListener(view -> startActivity(this, TextInputLayoutTestActivity.class));
     }
 
     @Override

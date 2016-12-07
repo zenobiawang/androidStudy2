@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".design.DesignSplashActivity"/>
         <activity android:name=".design.TextInputLayoutTestActivity"/>
+        <activity android:name=".design.ViewDemoTestActivity"/>
     </application>
 
 </manifest>
