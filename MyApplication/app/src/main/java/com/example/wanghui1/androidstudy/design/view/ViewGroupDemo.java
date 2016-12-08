@@ -28,12 +28,13 @@ public class ViewGroupDemo extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
         int count = getChildCount();
         childWidth = width/count;
-        setMeasuredDimension(childWidth, height);
+//        measureChildren(widthMeasureSpec, heightMeasureSpec);
+//        setMeasuredDimension(width, height);
     }
 
     @Override
