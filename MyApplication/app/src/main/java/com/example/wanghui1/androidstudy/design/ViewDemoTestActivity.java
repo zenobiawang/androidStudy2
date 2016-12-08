@@ -3,6 +3,7 @@ package com.example.wanghui1.androidstudy.design;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.wanghui1.androidstudy.R;
 import com.example.wanghui1.androidstudy.base.BaseActivity;
 
 /**
@@ -17,6 +18,6 @@ public class ViewDemoTestActivity extends BaseActivity {
 
     @Override
     protected int getContentLayout() {
-        return 0;
+        return R.layout.activity_view_demo_test;
     }
 }

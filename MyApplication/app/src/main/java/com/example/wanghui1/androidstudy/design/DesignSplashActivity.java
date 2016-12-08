@@ -20,7 +20,7 @@ public class DesignSplashActivity extends BaseActivity {
 
     private void initListener() {
         findViewById(R.id.btn_text_input).setOnClickListener(view -> startActivity(this, TextInputLayoutTestActivity.class));
-        findViewById(R.id.btn_view_group_demo).setOnClickListener(view -> startActivity(this, TextInputLayoutTestActivity.class));
+        findViewById(R.id.btn_view_group_demo).setOnClickListener(view -> startActivity(this, ViewDemoTestActivity.class));
     }
 
     @Override
