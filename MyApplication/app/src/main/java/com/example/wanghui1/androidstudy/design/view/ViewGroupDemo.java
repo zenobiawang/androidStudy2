@@ -29,12 +29,13 @@ public class ViewGroupDemo extends ViewGroup {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        height = MeasureSpec.getSize(heightMeasureSpec);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
         int count = getChildCount();
-        childWidth = width/count;
-//        measureChildren(widthMeasureSpec, heightMeasureSpec);
-//        setMeasuredDimension(width, height);
+        childWidth = w/count;
     }
 
     @Override
@@ -42,7 +43,8 @@ public class ViewGroupDemo extends ViewGroup {
         for (int i = 0; i < getChildCount(); i ++){
             View childView = getChildAt(i);
             Log.d(TAG, "wh------" + childWidth * i + "--"+ t+ "--"+ childWidth * (i + 1)+ "--"+ height);
-            childView.layout(childWidth * i, t, childWidth * (i + 1), height);
+            Log.d(TAG, "wh------tp---" + childWidth * i + "--"+ t+ "--"+ childWidth * (i + 1)+ "--"+ b);
+            childView.layout(childWidth * i, t, childWidth * (i + 1), b);
         }
     }
 }
