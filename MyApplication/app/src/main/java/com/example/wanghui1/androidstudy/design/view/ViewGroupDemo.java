@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 public class ViewGroupDemo extends ViewGroup {
     private static String TAG = "ViewGroupDemo";
     private int childWidth;
-    private int height;
     public ViewGroupDemo(Context context) {
         super(context);
     }
@@ -28,12 +27,22 @@ public class ViewGroupDemo extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int height = 0;
+        int count = getChildCount();
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
+        for (int i = 0; i < count; i ++){
+            int childHeight = getChildAt(i).getMeasuredHeight();
+            Log.d(TAG, "wh----height--" + childHeight);
+            height = childHeight > height? childHeight : height;
+        }
+        setMeasuredDimension(resolveSize(MeasureSpec.getSize(widthMeasureSpec),
+                widthMeasureSpec), resolveSize(height, heightMeasureSpec));
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        Log.d(TAG, "wh------sizeChanged---" + w + "--"+ h+ "--"+ oldw+ "--"+ oldh);
         int count = getChildCount();
         childWidth = w/count;
     }
@@ -42,8 +51,7 @@ public class ViewGroupDemo extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         for (int i = 0; i < getChildCount(); i ++){
             View childView = getChildAt(i);
-            Log.d(TAG, "wh------" + childWidth * i + "--"+ t+ "--"+ childWidth * (i + 1)+ "--"+ height);
-            Log.d(TAG, "wh------tp---" + childWidth * i + "--"+ t+ "--"+ childWidth * (i + 1)+ "--"+ b);
+            Log.d(TAG, "wh------tb---" + childWidth * i + "--"+ t+ "--"+ childWidth * (i + 1)+ "--"+ b);
             childView.layout(childWidth * i, t, childWidth * (i + 1), b);
         }
     }
