@@ -1,10 +1,13 @@
 package com.example.wanghui1.androidstudy.design.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.wanghui1.androidstudy.R;
 
 /**
  * Created by wanghui on 2016/12/7.
@@ -13,20 +16,24 @@ import android.view.ViewGroup;
 public class ViewGroupDemo extends ViewGroup {
     private static String TAG = "ViewGroupDemo";
     private int childWidth;
+    private int height;
     public ViewGroupDemo(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public ViewGroupDemo(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public ViewGroupDemo(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ViewGroupDemo);
+        height = array.getInt(R.styleable.ViewGroupDemo_count, 0);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int height = 0;
         int count = getChildCount();
         measureChildren(widthMeasureSpec, heightMeasureSpec);
@@ -35,8 +42,8 @@ public class ViewGroupDemo extends ViewGroup {
             Log.d(TAG, "wh----height--" + childHeight);
             height = childHeight > height? childHeight : height;
         }
-        setMeasuredDimension(resolveSize(MeasureSpec.getSize(widthMeasureSpec),
-                widthMeasureSpec), resolveSize(height, heightMeasureSpec));
+//        setMeasuredDimension(resolveSize(MeasureSpec.getSize(widthMeasureSpec),
+//                widthMeasureSpec), resolveSize(height, heightMeasureSpec));
     }
 
     @Override
@@ -44,7 +51,7 @@ public class ViewGroupDemo extends ViewGroup {
         super.onSizeChanged(w, h, oldw, oldh);
         Log.d(TAG, "wh------sizeChanged---" + w + "--"+ h+ "--"+ oldw+ "--"+ oldh);
         int count = getChildCount();
-        childWidth = w/count;
+        childWidth = w/count; 
     }
 
     @Override
@@ -52,7 +59,7 @@ public class ViewGroupDemo extends ViewGroup {
         for (int i = 0; i < getChildCount(); i ++){
             View childView = getChildAt(i);
             Log.d(TAG, "wh------tb---" + childWidth * i + "--"+ t+ "--"+ childWidth * (i + 1)+ "--"+ b);
-            childView.layout(childWidth * i, t, childWidth * (i + 1), b);
+            childView.layout(childWidth * i, t, childWidth * (i + 1), t + height);
         }
     }
 }
