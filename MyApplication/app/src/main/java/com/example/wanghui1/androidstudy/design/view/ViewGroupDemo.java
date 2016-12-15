@@ -34,13 +34,13 @@ public class ViewGroupDemo extends ViewGroup {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int height = 0;
+        int maxHeight = 0;
         int count = getChildCount();
         measureChildren(widthMeasureSpec, heightMeasureSpec);
         for (int i = 0; i < count; i ++){
             int childHeight = getChildAt(i).getMeasuredHeight();
             Log.d(TAG, "wh----height--" + childHeight);
-            height = childHeight > height? childHeight : height;
+            maxHeight = childHeight > maxHeight? childHeight : maxHeight;
         }
 //        setMeasuredDimension(resolveSize(MeasureSpec.getSize(widthMeasureSpec),
 //                widthMeasureSpec), resolveSize(height, heightMeasureSpec));
