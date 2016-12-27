@@ -16,8 +16,9 @@ import com.example.wanghui1.androidstudy.R;
 
 public class ViewDragHelperDemo extends LinearLayout{
     private static String TAG = "ViewDragHelperDemo";
-    private ViewDragHelper mDragHelper;
+    private final ViewDragHelper mDragHelper;
     private View mDragView1;
+    private View mDragView2;
 
     public ViewDragHelperDemo(Context context) {
         this(context, null);
@@ -27,54 +28,74 @@ public class ViewDragHelperDemo extends LinearLayout{
         this(context, attrs, 0);
     }
 
-    public ViewDragHelperDemo(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public ViewDragHelperDemo(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        mDragHelper = ViewDragHelper.create(this, 1f, new DragHelperCallback());
+    }
+
+    @Override
+    protected void onFinishInflate() {
         mDragView1 = findViewById(R.id.drag1);
-        mDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelper.Callback() {
-            @Override
-            public boolean tryCaptureView(View child, int pointerId) {
-                return true;
-            }
-            @Override
-            public int clampViewPositionVertical(View child, int top, int dy) {
-                    final int topBound = getPaddingTop();
-                    final int bottomBound = getHeight() - child.getHeight();
+        mDragView2 = findViewById(R.id.drag2);
+    }
 
-                    final int newTop = Math.min(Math.max(top, topBound), bottomBound);
+    private class DragHelperCallback extends ViewDragHelper.Callback {
 
-                    return newTop;
-            }
+        @Override
+        public boolean tryCaptureView(View child, int pointerId) {
 
-            @Override
-            public int clampViewPositionHorizontal(View child, int left, int dx) {
-                    final int leftBound = getPaddingLeft();
-                    final int rightBound = getWidth() - child.getWidth();
+            return true;
+        }
 
-                    final int newLeft = Math.min(Math.max(left, leftBound), rightBound);
+        @Override
+        public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
+            invalidate();
+        }
 
-                    return newLeft;
-            }
+        @Override
+        public void onViewCaptured(View capturedChild, int activePointerId) {
+            super.onViewCaptured(capturedChild, activePointerId);
+        }
 
-            @Override
-            public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-                invalidate();
-            }
+        @Override
+        public void onViewReleased(View releasedChild, float xvel, float yvel) {
+            super.onViewReleased(releasedChild, xvel, yvel);
+        }
 
-            @Override
-            public void onEdgeDragStarted(int edgeFlags, int pointerId) {
-                mDragHelper.captureChildView(mDragView1, pointerId);
-            }
-        });
+        @Override
+        public void onEdgeTouched(int edgeFlags, int pointerId) {
+            super.onEdgeTouched(edgeFlags, pointerId);
+        }
+
+        @Override
+        public void onEdgeDragStarted(int edgeFlags, int pointerId) {
+            mDragHelper.captureChildView(mDragView1, pointerId);
+        }
+
+        @Override
+        public int clampViewPositionVertical(View child, int top, int dy) {
+                final int topBound = getPaddingTop();
+                final int bottomBound = getHeight() - mDragView1.getHeight();
+
+                final int newTop = Math.min(Math.max(top, topBound), bottomBound);
+
+                return newTop;
+        }
+
+        @Override
+        public int clampViewPositionHorizontal(View child, int left, int dx) {
+                final int leftBound = getPaddingLeft();
+                final int rightBound = getWidth() - mDragView1.getWidth();
+
+                final int newLeft = Math.min(Math.max(left, leftBound), rightBound);
+
+                return newLeft;
+        }
+
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        mDragHelper.processTouchEvent(event);
-        return true;
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
             mDragHelper.cancel();
@@ -83,5 +104,9 @@ public class ViewDragHelperDemo extends LinearLayout{
         return mDragHelper.shouldInterceptTouchEvent(ev);
     }
 
-
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        mDragHelper.processTouchEvent(ev);
+        return true;
+    }
 }
