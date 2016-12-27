@@ -18,6 +18,6 @@ public class ViewDemoTestActivity extends BaseActivity {
 
     @Override
     protected int getContentLayout() {
-        return R.layout.activity_view_demo_test;
+        return R.layout.activity_view_drag_helper;
     }
 }
