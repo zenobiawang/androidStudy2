@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.wanghui1.androidstudy.design.view.ViewDragHelperDemo
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <View
-        android:id="@+id/drag1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@color/black_overlay"/>
-    <View
-        android:id="@+id/drag2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@color/colorGreen"/>
-    <View
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@color/colorPrimary"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.example.wanghui1.androidstudy.design.view.ViewDragHelperDemo
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/drag1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/black_overlay"/>
+        <View
+            android:id="@+id/drag2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/colorGreen"/>
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/colorPrimary"/>
+    </com.example.wanghui1.androidstudy.design.view.ViewDragHelperDemo>
 
-</com.example.wanghui1.androidstudy.design.view.ViewDragHelperDemo>
+</LinearLayout>

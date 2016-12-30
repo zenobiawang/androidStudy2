@@ -13,4 +13,11 @@
         <attr name="count" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="ViewDemo">
+        <attr name="textStartColor" format="color"/>
+        <attr name="textEndColor" format="color"/>
+        <attr name="textSize" format="integer"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
+
 </resources>

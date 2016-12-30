@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 /**
  * Created by wanghui on 2016/12/26.
+ * 可以滑动childView的线性布局
  */
 
 public class ViewDragHelperDemo extends LinearLayout{
