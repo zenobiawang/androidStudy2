@@ -2,6 +2,11 @@ package com.example.wanghui1.androidstudy.design.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -19,6 +24,8 @@ public class ViewDemo extends View {
     private int mTextEndColor;
     private int mDefaultStartColor;
     private int mDefaultEndColor;
+    private Paint mPaint;
+    private Rect mBound;
 
     public ViewDemo(Context context) {
         this(context, null);
@@ -39,5 +46,40 @@ public class ViewDemo extends View {
         mTextEndColor = array.getColor(R.styleable.ViewDemo_textEndColor, mDefaultEndColor);
         mText = array.getString(R.styleable.ViewDemo_text);
         array.recycle();
+
+        mPaint = new Paint();
+        mPaint.setTextSize(mTextSize);
+        mBound = new Rect();
+        mPaint.getTextBounds(mText, 0, mText.length(), mBound);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int heightMode = MeasureSpec.getSize(heightMeasureSpec);
+        int measureWidth, measuredHeight;
+        if (widthMode == MeasureSpec.EXACTLY){
+            measureWidth = widthSize;
+        }else {
+            measureWidth = mBound.width() + getPaddingLeft() + getPaddingRight();
+        }
+
+        if (heightMode == MeasureSpec.EXACTLY){
+            measuredHeight = heightSize;
+        }else {
+            measuredHeight = mBound.height() + getPaddingBottom() + getPaddingTop();
+        }
+        setMeasuredDimension(measureWidth, measuredHeight);
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        LinearGradient gradient = new LinearGradient(getLeft(), getTop(), mBound.width(), mBound.height(),
+                mTextStartColor, mTextEndColor, Shader.TileMode.CLAMP);
+        mPaint.setShader(gradient);
+        canvas.drawText(mText, 0, 0, mPaint);
     }
 }
