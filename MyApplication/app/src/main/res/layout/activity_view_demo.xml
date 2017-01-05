@@ -13,4 +13,4 @@
         app:textStartColor="@color/colorAccent"
         app:textEndColor="@color/colorGreen"/>
 
-</LinearLayout>
+</LinearLayout> 

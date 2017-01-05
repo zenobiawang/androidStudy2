@@ -83,10 +83,12 @@ public class ViewDemo extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.d(TAG, "wh------position---" + getTop() + "---" + getBottom());
+        Log.d(TAG, "wh------position---" + getTop() + "---" + getLeft());
         LinearGradient gradient = new LinearGradient(getLeft(), getTop(), mBound.width(), mBound.height(),
                 mTextStartColor, mTextEndColor, Shader.TileMode.CLAMP);
         mPaint.setShader(gradient);
-        canvas.drawText(mText, getWidth()/2 - mBound.width()/2, getHeight()/2 - mBound.height()/2, mPaint);
+        Log.d(TAG, "wh------size---" + (getLeft()-30)  + "---" + (getTop() + getPaddingTop() + 10) +"-----"+ getHeight() +"-----"+ mBound.height());
+        canvas.drawText(mText, 0, getTop() + getPaddingTop() + 10, mPaint);
+//        canvas.drawText(mText, getWidth()/2 - mBound.width()/2, getHeight()/2 - mBound.height()/2, mPaint);
     }
 }
