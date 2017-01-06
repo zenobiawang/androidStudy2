@@ -60,22 +60,21 @@ public class ViewDemo extends View {
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        int heightMode = MeasureSpec.getSize(heightMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int measureWidth, measuredHeight;
+        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
         if (widthMode == MeasureSpec.EXACTLY){
             measureWidth = widthSize;
         }else {
-//            mPaint.setTextSize(mTextSize);
-//            mPaint.getTextBounds(mText, 0, mText.length(), mBound);
             measureWidth = mBound.width() + getPaddingLeft() + getPaddingRight();
         }
 
         if (heightMode == MeasureSpec.EXACTLY){
             measuredHeight = heightSize;
         }else {
-            measuredHeight = mBound.height() + getPaddingBottom() + getPaddingTop();
+            measuredHeight = (int) (fontMetrics.top + getPaddingBottom() + getPaddingTop());
+//            measuredHeight = mBound.height() + getPaddingBottom() + getPaddingTop();
         }
-
         setMeasuredDimension(measureWidth, measuredHeight);
         Log.d(TAG, "wh-----measureSize---" + measureWidth + "---" + measuredHeight);
 //        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -87,8 +86,13 @@ public class ViewDemo extends View {
         LinearGradient gradient = new LinearGradient(getLeft(), getTop(), mBound.width(), mBound.height(),
                 mTextStartColor, mTextEndColor, Shader.TileMode.CLAMP);
         mPaint.setShader(gradient);
-        Log.d(TAG, "wh------size---" + (getLeft()-30)  + "---" + (getTop() + getPaddingTop() + 10) +"-----"+ getHeight() +"-----"+ mBound.height());
-        canvas.drawText(mText, 0, getTop() + getPaddingTop() + 10, mPaint);
+        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
+//        float fontTotalHeight = fontMetrics.bottom - fontMetrics.top;  //行高
+//        float offY = fontTotalHeight / 2 - fontMetrics.bottom;
+//        float newY =  offY;
+        Log.d(TAG, "wh-----metrics--" + fontMetrics.top + "---" + fontMetrics.bottom + "---" + fontMetrics.ascent + "----" + fontMetrics.descent + "----" + fontMetrics.leading);
+        Log.d(TAG, "wh------position---" + getPaddingLeft() + "---" + (mBound.height() + getPaddingTop()));
+        canvas.drawText(mText, getPaddingLeft(), mBound.height() + getPaddingTop(), mPaint);
 //        canvas.drawText(mText, getWidth()/2 - mBound.width()/2, getHeight()/2 - mBound.height()/2, mPaint);
     }
 }
