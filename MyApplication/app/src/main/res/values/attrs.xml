@@ -19,5 +19,15 @@
         <attr name="textSize" format="dimension"/>
         <attr name="text" format="string"/>
     </declare-styleable>
+    
+    <declare-styleable name="SoundViewDemo">
+        <attr name="radius" format="integer"/>
+        <attr name="blockHeight" format="dimension"/>
+        <attr name="blockSpacing" format="dimension"/>
+        <attr name="angle" format="integer"/>
+        <attr name="defaultColor" format="color"/>
+        <attr name="currentColor" format="color"/>
+        <attr name="centerSrc" format="reference"/> 
+    </declare-styleable>
 
 </resources>
