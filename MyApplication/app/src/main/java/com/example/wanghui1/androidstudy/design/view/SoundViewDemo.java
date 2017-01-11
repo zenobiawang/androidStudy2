@@ -2,6 +2,7 @@ package com.example.wanghui1.androidstudy.design.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -56,5 +57,16 @@ public class SoundViewDemo extends View {
         array.recycle();
 
         mPaint = new Paint();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        drawBlock(canvas);
+    }
+
+    private void drawBlock(Canvas canvas) {
+//        canvas.drawArc();
     }
 }
