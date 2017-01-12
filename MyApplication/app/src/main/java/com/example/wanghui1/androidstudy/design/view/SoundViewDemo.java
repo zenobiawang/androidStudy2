@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -67,6 +68,7 @@ public class SoundViewDemo extends View {
     }
 
     private void drawBlock(Canvas canvas) {
+        Rect blockRect = new Rect();
 //        canvas.drawArc();
     }
 }
