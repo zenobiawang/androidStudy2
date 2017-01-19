@@ -30,4 +30,8 @@
         <attr name="centerSrc" format="reference"/> 
     </declare-styleable>
 
+    <declare-styleable name="LargeImageView">
+        <attr name="src" format="reference"/>
+    </declare-styleable>
+
 </resources>
