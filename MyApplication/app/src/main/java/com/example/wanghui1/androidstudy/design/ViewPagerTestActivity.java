@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.example.wanghui1.androidstudy.R;
 
 /**
@@ -17,15 +18,13 @@ import com.example.wanghui1.androidstudy.R;
 
 public class ViewPagerTestActivity extends Activity {
     private ViewPager mViewPager;
-    private PagerTabStrip mTabStrip;
+    private PagerSlidingTabStrip mTabStrip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_view_pager);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mTabStrip = (PagerTabStrip) findViewById(R.id.viewpager_tab);
-        mTabStrip.setTextSpacing(100);
-        mTabStrip.setDrawFullUnderline(true);
+        mTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabStrip);
         mViewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
@@ -54,22 +53,6 @@ public class ViewPagerTestActivity extends Activity {
                 return String.valueOf(position);
             }
         });
-
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        mTabStrip.setViewPager(mViewPager);
     }
 }
