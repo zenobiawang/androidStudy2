@@ -23,6 +23,7 @@
         <activity android:name=".design.TextInputLayoutTestActivity"/>
         <activity android:name=".design.ViewDemoTestActivity"/>
         <activity android:name=".design.MyTableActivity"/>
+        <activity android:name=".design.ViewPagerTestActivity"/>
     </application>
 
 </manifest>
