@@ -8,10 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.example.wanghui1.androidstudy.R;
 
@@ -32,7 +29,7 @@ public abstract class BaseViewPagerCommonActivity extends FragmentActivity {
      * @return
      */
     protected View getContentView(){
-        return View.inflate(this, R.layout.common_view_pager, null);
+        return View.inflate(this, R.layout.activity_common_view_pager, null);
     }
 
     protected abstract List<PagerData> getPagerData();
@@ -46,7 +43,7 @@ public abstract class BaseViewPagerCommonActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_common_view_pager);
+        setContentView(getContentView());
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mTabStrip = (TabLayout) findViewById(R.id.tab_strip);
         setTabPattern(mTabStrip);
@@ -106,4 +103,7 @@ public abstract class BaseViewPagerCommonActivity extends FragmentActivity {
 //        }
 //        return tab;
 //    }
+    public int getCurrentPage(){
+        return mViewPager.getCurrentItem();
+    }
 }
