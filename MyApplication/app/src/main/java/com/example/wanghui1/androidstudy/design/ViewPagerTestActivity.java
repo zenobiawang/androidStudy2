@@ -1,58 +1,45 @@
 package com.example.wanghui1.androidstudy.design;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.example.wanghui1.androidstudy.R;
+import com.example.wanghui1.androidstudy.viewpager.BaseViewPagerActivity;
+import com.example.wanghui1.androidstudy.viewpager.BaseViewPagerCommonActivity;
+import com.example.wanghui1.androidstudy.viewpager.PagerData;
+import com.example.wanghui1.androidstudy.viewpager.PagerFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wanghui on 2017/1/19.
  */
 
-public class ViewPagerTestActivity extends Activity {
-    private ViewPager mViewPager;
-    private PagerSlidingTabStrip mTabStrip;
+public class ViewPagerTestActivity extends BaseViewPagerCommonActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_view_pager);
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabStrip);
-        mViewPager.setAdapter(new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return 5;
-            }
+        setCurrentPage(3);
+        List<PagerData> pagerDatas = new ArrayList<>();
+        for (int i = 0; i < 6; i ++){
+            PagerData data = new PagerData();
+            data.setFragment(new PagerFragment());
+            data.setPageTitle(getString(R.string.test) + (i+ 1));
+            pagerDatas.add(data);
+        }
+        updatePagerData(pagerDatas);
+    }
 
-            @Override
-            public boolean isViewFromObject(View view, Object object) {
-                return view == object;
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                container.removeView((View) object);
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
-                TextView textView = new TextView(ViewPagerTestActivity.this);
-                textView.setText("ViewPager + " + position);
-                return textView;
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return String.valueOf(position);
-            }
-        });
-        mTabStrip.setViewPager(mViewPager);
+    @Override
+    protected List<PagerData> getPagerData() {
+        List<PagerData> pagerDatas = new ArrayList<>();
+        for (int i = 0; i < 5; i ++){
+            PagerData data = new PagerData();
+            data.setFragment(new PagerFragment());
+            data.setPageTitle(getString(R.string.test) + i);
+            pagerDatas.add(data);
+        }
+        return pagerDatas;
     }
 }

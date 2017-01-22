@@ -1,7 +1,8 @@
 package com.example.wanghui1.androidstudy.viewpager;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -9,27 +10,23 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.wanghui1.androidstudy.R;
-import com.example.wanghui1.androidstudy.viewpager.PagerSlidingTabStrip.TabStyleProvider;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wanghui on 2017/1/20.
- * 通用的viewpager
+ * Created by wanghui on 2017/1/22.
  */
-public abstract class BaseViewPagerActivity extends FragmentActivity {
+
+public abstract class BaseViewPagerCommonActivity extends FragmentActivity {
     private ViewPager mViewPager;
-    private PagerSlidingTabStrip mTabStrip;
+    private TabLayout mTabStrip;
     private List<PagerData> mPagerContainer = new ArrayList<>();
     private ViewPagerAdapter mAdapter;
-
-
     /**
      * viewpager布局，一般为默认布局
      * @return
@@ -44,31 +41,23 @@ public abstract class BaseViewPagerActivity extends FragmentActivity {
      * 设置tab样式
      * @param mTabStrip
      */
-    protected void setTabPattern(PagerSlidingTabStrip mTabStrip){
-        mTabStrip.setDividerColorResource(android.R.color.darker_gray);
-        mTabStrip.setIndicatorColorResource(R.color.colorPrimary);
-        mTabStrip.setIndicatorHeight(4);
-        mTabStrip.setUnderlineHeight(0);
-        mTabStrip.setTextColorResource(android.R.color.black);
-        mTabStrip.setTextSize(32);
-        mTabStrip.setTextColorResource(R.drawable.tab_text_color);
-    }
+    protected void setTabPattern(TabLayout mTabStrip){};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentView());
+        setContentView(R.layout.activity_common_view_pager);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        mTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tab_strip);
+        mTabStrip = (TabLayout) findViewById(R.id.tab_strip);
         setTabPattern(mTabStrip);
 
         mPagerContainer = getPagerData();
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
-        mTabStrip.setViewPager(mViewPager);
+        mTabStrip.setupWithViewPager(mViewPager);
     }
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter implements TabStyleProvider{
+    private class ViewPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.TabStyleProvider {
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -103,20 +92,18 @@ public abstract class BaseViewPagerActivity extends FragmentActivity {
     public void updatePagerData(List<PagerData> datas){
         mPagerContainer = datas;
         mAdapter.notifyDataSetChanged();
-        mTabStrip.notifyDataSetChanged();
     }
 
-    public View getTabPattern(int position, int selectPosition){
-        TextView tab = new TextView(this);
-        tab.setText(mAdapter.getPageTitle(position));
-        tab.setGravity(Gravity.CENTER);
-        tab.setSingleLine();
-        if (position == selectPosition){
-            tab.setTextColor(getResources().getColor(R.color.colorPrimary));
-        }else {
-            tab.setTextColor(getResources().getColor(R.color.black_overlay));
-        }
-        return tab;
-    }
-
+//    public View getTabPattern(int position, int selectPosition){
+//        TextView tab = new TextView(this);
+//        tab.setText(mAdapter.getPageTitle(position));
+//        tab.setGravity(Gravity.CENTER);
+//        tab.setSingleLine();
+//        if (position == selectPosition){
+//            tab.setTextColor(getResources().getColor(R.color.colorPrimary));
+//        }else {
+//            tab.setTextColor(getResources().getColor(R.color.black_overlay));
+//        }
+//        return tab;
+//    }
 }
